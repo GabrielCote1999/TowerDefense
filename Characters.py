@@ -1,42 +1,6 @@
 import pygame
 
-class Tower(metaclass=abc.ABCMeta):
-	 @abc.abstractmethod
-	
-	def setLife(self):
-		pass
-
-	def getLife(self):
-		pass
-
-	def setRange(self):
-		pass
-
-	def getRange(self):
-		pass
-
-	def getType(self):
-		pass
-
-	def setDef(self):
-		pass
-
-	def getDef(self):
-		pass
-
-	def getPos(self):
-		pass
-
-	def setPos(self):
-		pass
-
-	def setDmg(self):
-		pass
-
-	def getDmg(self):
-		pass
-
-class RedTower(Tower):
+class RedTower():
 
 	def __init__(self,posX,posY, ray):
 
@@ -44,18 +8,17 @@ class RedTower(Tower):
 		self.posX = posX
 		self.life = 50
 		self.ray = ray
-		self.type = redTower
-		self.def = 10
+		self.type = 'redTower'
+		self.defense = 10
 		self.dmg = 20
 		x =pygame.Rect(30,30,300,30)
 
-
 	def setLife(self, life):
-		
+
 		self.life = life
 
 	def getLife(self):
-		
+
 		return self.life
 
 	def setRange(self, ray):
@@ -64,19 +27,20 @@ class RedTower(Tower):
 
 
 	def getRange(self):
-		
+
 		return self.ray
 
 	def getType(self):
-		
+
 		return self.type
 
-	def setDef(self, def):
+	def setDef(self, defense):
 
-		self.def = def
+		self.defense = defense
 
 	def getDef(self):
-		return self.def
+
+		return self.defense
 
 	def getPos(self):
 		pass
@@ -88,4 +52,5 @@ class RedTower(Tower):
 		self.dmg = dmg
 
 	def getDmg(self):
+
 		return self.dmg
