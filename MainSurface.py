@@ -1,5 +1,8 @@
 import pygame, sys
 
+from TowerDefense import Map
+
+
 WIDTH = 1500
 HEIGHT = 1000
 WIN = pygame.display.set_mode( (WIDTH, HEIGHT) )
@@ -10,8 +13,13 @@ pygame.display.set_caption( "Jeux" )
 
 
 
+map = pygame.image.load(r'C:\Users\Gabriel\Desktop\Apprentissage\Td\TowerDefense\game_background_3.png')
+
+map = pygame.transform.scale(map,(WIDTH,HEIGHT))
+
 def draw_window():
-    WIN.fill( (255,255,0) )
+
+    WIN.blit(map,(0,0))
     pygame.display.update()
 
 def main():
