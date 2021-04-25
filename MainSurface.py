@@ -1,6 +1,6 @@
 import pygame, sys
 
-from TowerDefense import Map
+
 
 
 WIDTH = 1500
@@ -17,9 +17,10 @@ map = pygame.image.load(r'C:\Users\Gabriel\Desktop\Apprentissage\Td\TowerDefense
 
 map = pygame.transform.scale(map,(WIDTH,HEIGHT))
 
+
 def draw_window():
 
-    WIN.blit(map,(0,0))
+    WIN.blit(map, (0, 0) )
     pygame.display.update()
 
 def main():
