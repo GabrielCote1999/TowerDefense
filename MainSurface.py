@@ -55,16 +55,12 @@ def main():
 
             if event.type == pygame.MOUSEBUTTONDOWN:
 
-                print(pygame.mouse.get_pos())
 
-                positionX = pygame.mouse.get_pos()[0]
+                x.changePos(x)
 
-                positionY =  pygame.mouse.get_pos()[1]
 
-                x.setXPos((positionX))
-                x.setYPos((positionY))
 
-                print("ceci est x pos",x.getXPos())
+
 
 
 

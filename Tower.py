@@ -3,7 +3,7 @@ import os
 
 class Tower():
 
- 
+
 
     def __init__(self,xPos, yPos):
 
@@ -11,6 +11,19 @@ class Tower():
         self.yPos = yPos
         self.isSelected = False
         self.pos = [self.xPos, self.yPos]
+        self.width = 100
+        self. length = 100
+        self.shootingRange = 3.14*self.length/2*self.length/2
+
+
+    def getShootingRange(self):
+
+        return self.shootingRange
+
+
+    def setShootingRange(self, length):
+
+        self.shootingRange = 3.14 * length*length
 
 
     """"
@@ -52,6 +65,35 @@ class Tower():
     def setPos(self,x,y):
 
         self.pos[self.xPos,self.yPos] = [x,y]
+
+    def getLength(self):
+
+        return self.length
+
+    def getWidth(self):
+
+        return self.width
+
+    """"
+       Change the position of a tower to a clicked position
+       RETURN : void
+    """
+
+    def changePos(self,tower):
+
+
+
+        positionX = pygame.mouse.get_pos()[0]
+
+        positionY = pygame.mouse.get_pos()[1]
+
+        tower.setXPos( (positionX - tower.getWidth() / 2) )
+
+        tower.setYPos( (positionY - tower.getLength() / 2) )
+
+
+
+
 
 
 
