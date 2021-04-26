@@ -1,19 +1,26 @@
 import pygame, sys
+import os
 
 from Tower import Tower
 
 # x = Tower( 2, 3 )
 
-WIDTH = 1500
-HEIGHT = 1000
+WIDTH = 700
+HEIGHT = 500
 WIN = pygame.display.set_mode( (WIDTH, HEIGHT) )
 FPS = 60
 
 pygame.display.set_caption( "Jeux" )
 
-map = pygame.image.load( r'C:\Users\Gabriel\Desktop\Apprentissage\Td\TowerDefense\game_background_3.png' )
 
-map = pygame.transform.scale( map, (WIDTH, HEIGHT) )
+current_path = os.path.dirname("towerDefense")
+
+transform = os.path.join(current_path, "game_background_3.png")
+
+map = pygame.image.load(transform)
+ 
+
+map = pygame.transform.scale(map, (WIDTH, HEIGHT) )
 
 
 class Game():

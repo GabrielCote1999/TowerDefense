@@ -1,10 +1,11 @@
 import pygame
+import os
 
 class Tower():
 
     xPos = 0
     yPos = 0
-    Tower = pygame.image.load( r'C:\Users\Gabriel\Desktop\Apprentissage\Td\TowerDefense\towerDefense_tile249.png' )
+ 
 
     def __init__(self, xPos, yPos):
 
@@ -19,11 +20,15 @@ class Tower():
     """
     def surfaceTower(self):
 
-        surface = pygame.image.load( r'C:\Users\Gabriel\Desktop\Apprentissage\Td\TowerDefense\towerDefense_tile249.png' )
+        current_path = os.path.dirname("towerDefense")
 
-        surface = pygame.transform.scale( surface, (100, 100) )
+        transform = os.path.join(current_path, "towerDefense_tile249.png")
 
-        return surface
+        Tower = pygame.image.load(transform)
+
+        Tower = pygame.transform.scale(Tower, (100, 100) )
+
+        return Tower
 
 
     def getSelected(self):
@@ -33,7 +38,7 @@ class Tower():
 
 x = Tower(2,3)
 
-print(x.return2())
+
 
 
 
