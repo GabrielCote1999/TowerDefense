@@ -2,25 +2,17 @@ import pygame, sys
 import os
 
 from Tower import Tower
+from Map import Map
 
-# x = Tower( 2, 3 )
 
-WIDTH = 700
-HEIGHT = 500
+y = Map(0,0)
+
+WIDTH = 1000
+HEIGHT = 700
 WIN = pygame.display.set_mode( (WIDTH, HEIGHT) )
 FPS = 60
 
 pygame.display.set_caption( "Jeux" )
-
-
-current_path = os.path.dirname("towerDefense")
-
-transform = os.path.join(current_path, "game_background_3.png")
-
-map = pygame.image.load(transform)
- 
-
-map = pygame.transform.scale(map, (WIDTH, HEIGHT) )
 
 
 class Game():
@@ -30,10 +22,14 @@ class Game():
         self.towers = []
 
 
-    def draw_window(self, x):
+    def draw_window(self, x, y):
 
-        WIN.blit( map, (0, 0) )
-        WIN.blit(x,(200,110))
+
+        #draw the map
+        WIN.blit( Map.surfaceMap(self), (0, 0) )
+        #draw the tower
+        WIN.blit(x.surfaceTower(), ( x.getXPos(), x.getYPos() ) )
+
         pygame.display.update()
 
 
@@ -41,9 +37,10 @@ def main():
     game = Game()
     clock = pygame.time.Clock()
     run = True
-    x = Tower(2,3)
+    x = Tower(100,200)
     while run:
 
+        isclicked = True
         # clock
         clock = pygame.time.Clock()
         run = True
@@ -56,7 +53,38 @@ def main():
             if event.type == pygame.QUIT:
                 run = False
 
-        game.draw_window(x.surfaceTower())
+            if event.type == pygame.MOUSEBUTTONDOWN:
+
+                print(pygame.mouse.get_pos())
+
+                positionX = pygame.mouse.get_pos()[0]
+
+                positionY =  pygame.mouse.get_pos()[1]
+
+                x.setXPos((positionX))
+                x.setYPos((positionY))
+
+                print("ceci est x pos",x.getXPos())
+
+
+
+
+
+                """""
+                print(x.getXPos())
+                x.setXPos(200)
+                print("dans le mousseButtonDown")
+                print(x.getXPos())
+                print(x.getPos())
+                x.pos[0] = x.getXPos()
+                """""
+
+
+
+
+
+
+        game.draw_window(x,y)
 
 
 

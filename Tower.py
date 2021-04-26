@@ -3,15 +3,14 @@ import os
 
 class Tower():
 
-    xPos = 0
-    yPos = 0
  
 
-    def __init__(self, xPos, yPos):
+    def __init__(self,xPos, yPos):
 
         self.xPos = xPos
         self.yPos = yPos
         self.isSelected = False
+        self.pos = [self.xPos, self.yPos]
 
 
     """"
@@ -30,10 +29,45 @@ class Tower():
 
         return Tower
 
+    def getXPos(self):
 
-    def getSelected(self):
+        return self.xPos
 
-        return self.isSelected
+    def getYPos(self):
+
+        return self.yPos
+
+    def getPos(self):
+
+        return self.pos
+
+    def setXPos(self,x ):
+
+        self.xPos = x
+
+    def setYPos(self, yPos):
+
+        self.yPos = yPos
+
+    def setPos(self,x,y):
+
+        self.pos[self.xPos,self.yPos] = [x,y]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 x = Tower(2,3)
