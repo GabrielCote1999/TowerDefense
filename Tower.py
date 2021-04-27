@@ -14,15 +14,20 @@ class Tower():
         self.pos = [self.xPos, self.yPos]
         self.width = 100
         self. length = 100
-        self.shootingRange = 3.14*self.length/2*self.length/2
+        self.shootingRange = 120
         
 
+    """
+        Define the turrent range and draw it
+        *1000,700 = screen size
 
+    """
     def shooterRange(self, normalisedPosX, normalisedPosY):
+        
 
         surface = pygame.Surface((1000,700), pygame.SRCALPHA, 32)
 
-        circle = pygame.draw.circle(surface, (30,224,200,100), (int(normalisedPosX), (int(normalisedPosY)) ) , 120)
+        circle = pygame.draw.circle(surface, (30,224,200,100), (int(normalisedPosX), (int(normalisedPosY)) ) , int(self.shootingRange))
 
         return surface
     def getShootingRange(self):

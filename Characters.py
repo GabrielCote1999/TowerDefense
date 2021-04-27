@@ -1,56 +1,30 @@
 import pygame
 
-class RedTower():
+class Characters():
 
-	def __init__(self,posX,posY, ray):
+
+	def __init__(self,posX,posY):
 
 		self.posY = posY
 		self.posX = posX
 		self.life = 50
-		self.ray = ray
-		self.type = 'redTower'
-		self.defense = 10
-		self.dmg = 20
-		x =pygame.Rect(30,30,300,30)
+		self.ray = 30
 
-	def setLife(self, life):
+	def move(self):
 
-		self.life = life
+		surface = pygame.Surface((1000,700), pygame.SRCALPHA, 32)
+		circle = pygame.draw.circle(surface, (30,224,200), (500, 40), 12 )
 
-	def getLife(self):
+		return surface
+	
 
-		return self.life
+  
 
-	def setRange(self, ray):
-
-		self.ray = (ray*ray)*3.14
+		
 
 
-	def getRange(self):
+	
 
-		return self.ray
+		
 
-	def getType(self):
 
-		return self.type
-
-	def setDef(self, defense):
-
-		self.defense = defense
-
-	def getDef(self):
-
-		return self.defense
-
-	def getPos(self):
-		pass
-
-	def setPos(self):
-		pass
-
-	def setDmg(self, dmg):
-		self.dmg = dmg
-
-	def getDmg(self):
-
-		return self.dmg

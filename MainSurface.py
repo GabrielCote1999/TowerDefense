@@ -4,6 +4,8 @@ import os
 from Tower import Tower
 from Map import Map
 
+from Characters import Characters
+
 
 y = Map(0,0)
 
@@ -22,7 +24,7 @@ class Game():
         self.towers = []
 
 
-    def draw_window(self, x, y):
+    def draw_window(self, x, y,character):
 
 
         #draw the map
@@ -31,22 +33,14 @@ class Game():
         #draw the tower
         WIN.blit(x.surfaceTower(), ( x.getXPos(), x.getYPos() ) )
 
-
-        
-
+        #draw the tower range
         WIN.blit(x.shooterRange(x.getNormalPosX(), x.getNormalPosY()),  (int(x.getNormalPosX()-x.getNormalPosX()), (int(x.getNormalPosY()-x.getNormalPosY())) ) ) 
 
 
-
-
-
         
+        WIN.blit(character.move(),  (int(30), (int(39)) ) ) 
         
-
-        print("ceci est NormalposX ", x.getNormalPosX())
-        print("ceci est xPos", x.getXPos())
-
-       
+  
         pygame.display.update()
 
 
@@ -55,6 +49,8 @@ def main():
     clock = pygame.time.Clock()
     run = True
     x = Tower(100,200)
+
+    character = Characters(30,30)
     while run:
 
         isclicked = True
@@ -71,12 +67,11 @@ def main():
                 run = False
 
             if event.type == pygame.MOUSEBUTTONDOWN:
-
-
+                #Change the position of a tower at the clicked position
                 x.changePos(x)
 
 
-        game.draw_window(x,y)
+        game.draw_window(x,y, character)
 
 
 
