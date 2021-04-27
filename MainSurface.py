@@ -32,11 +32,9 @@ class Game():
         WIN.blit(x.surfaceTower(), ( x.getXPos(), x.getYPos() ) )
 
 
-        surface = pygame.Surface((1000,700), pygame.SRCALPHA, 32)
+        
 
-        pygame.draw.circle(surface, (30,224,200,100), (int(x.getNormalPosX()), (int(x.getNormalPosY())) ) , 120)
-
-        WIN.blit(surface,  (int(x.getNormalPosX()-x.getNormalPosX()), (int(x.getNormalPosY()-x.getNormalPosY())) ) ) 
+        WIN.blit(x.shooterRange(x.getNormalPosX(), x.getNormalPosY()),  (int(x.getNormalPosX()-x.getNormalPosX()), (int(x.getNormalPosY()-x.getNormalPosY())) ) ) 
 
 
 

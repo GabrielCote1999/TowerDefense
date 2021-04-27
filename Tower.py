@@ -18,11 +18,13 @@ class Tower():
         
 
 
-    def shooterRange(self):
+    def shooterRange(self, normalisedPosX, normalisedPosY):
 
-        circle = pygame.draw.circle(MainSurface.WIN, (255,255,0), 20, 20)
+        surface = pygame.Surface((1000,700), pygame.SRCALPHA, 32)
 
-        return circle
+        circle = pygame.draw.circle(surface, (30,224,200,100), (int(normalisedPosX), (int(normalisedPosY)) ) , 120)
+
+        return surface
     def getShootingRange(self):
 
         return self.shootingRange
