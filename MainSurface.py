@@ -27,9 +27,28 @@ class Game():
 
         #draw the map
         WIN.blit( Map.surfaceMap(self), (0, 0) )
+
         #draw the tower
         WIN.blit(x.surfaceTower(), ( x.getXPos(), x.getYPos() ) )
 
+
+        surface = pygame.Surface((1000,700), pygame.SRCALPHA, 32)
+
+        pygame.draw.circle(surface, (30,224,200,100), (int(x.getNormalPosX()), (int(x.getNormalPosY())) ) , 120)
+
+        WIN.blit(surface,  (int(x.getNormalPosX()-x.getNormalPosX()), (int(x.getNormalPosY()-x.getNormalPosY())) ) ) 
+
+
+
+
+
+        
+        
+
+        print("ceci est NormalposX ", x.getNormalPosX())
+        print("ceci est xPos", x.getXPos())
+
+       
         pygame.display.update()
 
 
@@ -57,27 +76,6 @@ def main():
 
 
                 x.changePos(x)
-
-
-
-
-
-
-
-
-
-                """""
-                print(x.getXPos())
-                x.setXPos(200)
-                print("dans le mousseButtonDown")
-                print(x.getXPos())
-                print(x.getPos())
-                x.pos[0] = x.getXPos()
-                """""
-
-
-
-
 
 
         game.draw_window(x,y)

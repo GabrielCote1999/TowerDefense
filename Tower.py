@@ -1,5 +1,6 @@
 import pygame
 import os
+#from MainSurface import MainSurface
 
 class Tower():
 
@@ -14,8 +15,14 @@ class Tower():
         self.width = 100
         self. length = 100
         self.shootingRange = 3.14*self.length/2*self.length/2
+        
 
 
+    def shooterRange(self):
+
+        circle = pygame.draw.circle(MainSurface.WIN, (255,255,0), 20, 20)
+
+        return circle
     def getShootingRange(self):
 
         return self.shootingRange
@@ -24,6 +31,21 @@ class Tower():
     def setShootingRange(self, length):
 
         self.shootingRange = 3.14 * length*length
+
+    def getNormalPosX(self):
+
+        normalisedPosX = (self.xPos)+self.length//2
+
+        return normalisedPosX
+
+
+    def getNormalPosY(self):
+
+        normalisedPosY = (self.yPos)+self.length//2
+
+        return normalisedPosY
+
+
 
 
     """"
@@ -80,7 +102,6 @@ class Tower():
     """
 
     def changePos(self,tower):
-
 
 
         positionX = pygame.mouse.get_pos()[0]
