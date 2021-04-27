@@ -29,6 +29,7 @@ class Tower():
 
         circle = pygame.draw.circle(surface, (30,224,200,100), (int(normalisedPosX), (int(normalisedPosY)) ) , int(self.shootingRange))
 
+        
         return surface
     def getShootingRange(self):
 

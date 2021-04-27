@@ -3,6 +3,7 @@ import os
 
 from Tower import Tower
 from Map import Map
+import time 
 
 from Characters import Characters
 
@@ -22,26 +23,33 @@ class Game():
     def __init__(self):
         self.lives = 100
         self.towers = []
+        self.characters = [4,5,2,1,2]
 
 
-    def draw_window(self, x, y,character):
+    def draw_window(self, x, y,character,game):
 
 
         #draw the map
         WIN.blit( Map.surfaceMap(self), (0, 0) )
 
-        #draw the tower
-        WIN.blit(x.surfaceTower(), ( x.getXPos(), x.getYPos() ) )
+        #character        
+        WIN.blit(character.move(),  (int(0), (int(0)) ) ) 
+
+        #game.drawCharacters(character)
 
         #draw the tower range
         WIN.blit(x.shooterRange(x.getNormalPosX(), x.getNormalPosY()),  (int(x.getNormalPosX()-x.getNormalPosX()), (int(x.getNormalPosY()-x.getNormalPosY())) ) ) 
 
-
-        
-        WIN.blit(character.move(),  (int(30), (int(39)) ) ) 
-        
-  
+        #draw the tower
+        WIN.blit(x.surfaceTower(), ( x.getXPos(), x.getYPos() ) )
+   
         pygame.display.update()
+
+
+    def drawCharacters(self,character):
+
+        #character        
+        WIN.blit(character.move(),  (int(0), (int(0)) ) ) 
 
 
 def main():
@@ -70,8 +78,11 @@ def main():
                 #Change the position of a tower at the clicked position
                 x.changePos(x)
 
+                print("ceci est x ",x.getXPos())
+                print("Ceci est Y ",x.getYPos())
 
-        game.draw_window(x,y, character)
+
+        game.draw_window(x,y, character, game)
 
 
 
