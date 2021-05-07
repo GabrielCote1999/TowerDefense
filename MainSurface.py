@@ -6,6 +6,8 @@ from Map import Map
 import time 
 
 from Characters import Characters
+from GrayEnemy import GrayEnemy
+import random
 
 
 y = Map(0,0)
@@ -23,11 +25,11 @@ class Game():
     def __init__(self):
         self.lives = 100
         self.towers = []
-        self.characters = [Characters()]
+        self.characters = []
 
         self.characterNum = len(self.characters)
         self.compteur = 0
-        self.l = 0
+        self.objectCount = 0
 
 
     def draw_window(self, x, y,character,game):
@@ -36,9 +38,10 @@ class Game():
         #draw the map
         WIN.blit( Map.surfaceMap(self), (0, 0) )
 
-
+        #draw planes
         for i in range (self.characterNum):
-            WIN.blit(game.characters[i].move(),  (int(0), (int(0)) ) ) 
+            WIN.blit(game.characters[i].move(game.characters[i]), ( (game.characters[i].getXPos()), (game.characters[i].getYPos()))  ) 
+        
         
 
 
@@ -54,10 +57,31 @@ class Game():
 
     def drawCharacters(self,character):
 
-        #character        
+        #character
         WIN.blit(character.move(),  (int(0), (int(0)) ) ) 
-        
-         
+
+
+
+
+
+    #add the different characters to the game every 4 seconds
+    def addCharacters(self):
+
+        if self.compteur %30 == 0:
+
+
+                randomEnemy = [Characters(),GrayEnemy()]
+
+                randomNumber = random.randint(0,1)
+
+                self.characters.append(randomEnemy[randomNumber])
+
+                self.characterNum = self.characterNum +1
+
+                self.objectCount = self.objectCount + 1
+
+
+
 
 
 def main():
@@ -68,24 +92,17 @@ def main():
 
     character = game.characters
 
-   
-
 
     while run:
 
-        if game.compteur %40 == 0:
-
-                game.characters.append(Characters())
-                print("dans le if")
-                game.characterNum = game.characterNum +1
-                print("ceci est le nombre de personnage ", game.characterNum)
-
+        game.addCharacters()
 
 
         game.compteur = game.compteur+1
 
-        print(game.compteur)
-                
+        #print(game.compteur)
+        #print(game.characters[game.objectCount].checkDelete())
+
 
 
         isclicked = True

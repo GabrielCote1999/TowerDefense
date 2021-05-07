@@ -1,4 +1,5 @@
 import pygame
+import os
 
 class Characters():
 
@@ -7,24 +8,31 @@ class Characters():
 
 		self.posY = 520
 		self.posX = 0
-		self.life = 50
+		self.life = 100
 		self.ray = 30
+		self.width = 100
+		self.length = 100
 
 
+	def getXPos(self):
 
-	def getXpos(self):
+		return self.posX- self.width/2
 
-		return self.posX
+	def getYPos(self):
 
-	def getYpos(self):
+		return self.posY - self.width/2
 
-		return self.posY
+	def move(self, plane):
 
-	def move(self):
+		current_path = os.path.dirname( "towerDefense" )
 
-		surface = pygame.Surface((1000,700), pygame.SRCALPHA, 32)
+		transform = os.path.join( current_path, "greenPlane.png" )
 
-		circle = pygame.draw.circle(surface, (255,255,0), (self.posX, self.posY), 12 )
+		plane = pygame.image.load( transform )
+
+		plane = pygame.transform.scale( plane, (100, 100) )
+
+		
 
 		if self.posX < 133:
 
@@ -76,16 +84,20 @@ class Characters():
 		elif self.posX >=907 and self.posY >= 525 and self.posY < 700:
 
 			self.posY = self.posY +5
-		
-		
-			
 
 
-		
+		return plane
 
-		#elif self.
+	def checkDelete(self):
 
-		return surface
+		if self.posY <=300:
+
+			print("est plus grand que 600")
+
+			self.pop()
+			return True
+		else:
+			return False
 
 		
 	
