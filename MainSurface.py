@@ -23,19 +23,25 @@ class Game():
     def __init__(self):
         self.lives = 100
         self.towers = []
-        self.characters = [4,5,2,1,2]
+        self.characters = [Characters()]
+
+        self.characterNum = len(self.characters)
+        self.compteur = 0
+        self.l = 0
 
 
     def draw_window(self, x, y,character,game):
 
-
+       
         #draw the map
         WIN.blit( Map.surfaceMap(self), (0, 0) )
 
-        #character        
-        WIN.blit(character.move(),  (int(0), (int(0)) ) ) 
 
-        #game.drawCharacters(character)
+        for i in range (self.characterNum):
+            WIN.blit(game.characters[i].move(),  (int(0), (int(0)) ) ) 
+        
+
+
 
         #draw the tower range
         WIN.blit(x.shooterRange(x.getNormalPosX(), x.getNormalPosY()),  (int(x.getNormalPosX()-x.getNormalPosX()), (int(x.getNormalPosY()-x.getNormalPosY())) ) ) 
@@ -50,6 +56,8 @@ class Game():
 
         #character        
         WIN.blit(character.move(),  (int(0), (int(0)) ) ) 
+        
+         
 
 
 def main():
@@ -58,8 +66,27 @@ def main():
     run = True
     x = Tower(100,200)
 
-    character = Characters(30,30)
+    character = game.characters
+
+   
+
+
     while run:
+
+        if game.compteur %40 == 0:
+
+                game.characters.append(Characters())
+                print("dans le if")
+                game.characterNum = game.characterNum +1
+                print("ceci est le nombre de personnage ", game.characterNum)
+
+
+
+        game.compteur = game.compteur+1
+
+        print(game.compteur)
+                
+
 
         isclicked = True
         # clock
@@ -76,10 +103,11 @@ def main():
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 #Change the position of a tower at the clicked position
-                x.changePos(x)
+                #x.changePos(x)
 
-                print("ceci est x ",x.getXPos())
-                print("Ceci est Y ",x.getYPos())
+                #print("ceci est x ",x.getXPos())
+                #print("Ceci est Y ",x.getYPos())
+                print(pygame.mouse.get_pos())
 
 
         game.draw_window(x,y, character, game)
