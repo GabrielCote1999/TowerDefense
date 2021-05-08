@@ -99,6 +99,10 @@ class Characters():
 		else:
 			return False
 
+	def getLife(self):
+
+		return self.life
+
 		
 	
 

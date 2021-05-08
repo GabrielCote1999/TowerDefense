@@ -31,6 +31,8 @@ class Game():
         self.compteur = 0
         self.objectCount = 0
 
+        self.test = 0
+
 
     def draw_window(self, x, y,character,game):
 
@@ -60,11 +62,17 @@ class Game():
         #character
         WIN.blit(character.move(),  (int(0), (int(0)) ) ) 
 
+    def towerAttack(self, tower):
+        
+
+        if self.characters[0].getXPos() > tower.getShootingZoneX(0) and self.characters[0].getXPos() < tower.getShootingZoneX(1) and self.characters[0].getYPos() > tower.getShootingZoneY(0)and self.characters[0].getYPos() < tower.getShootingZoneY(1):
+
+            
+            self.test = self.test + 1
+            print(self.test)
 
 
-
-
-    #add the different characters to the game every 4 seconds
+    #add the different characters to the game every x seconds
     def addCharacters(self):
 
         if self.compteur %30 == 0:
@@ -97,13 +105,16 @@ def main():
 
         game.addCharacters()
 
+        game.towerAttack(x)
+       
+
 
         game.compteur = game.compteur+1
 
         #print(game.compteur)
         #print(game.characters[game.objectCount].checkDelete())
 
-
+        
 
         isclicked = True
         # clock

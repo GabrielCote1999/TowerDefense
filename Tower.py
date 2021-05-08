@@ -15,12 +15,44 @@ class Tower():
         self.width = 100
         self. length = 100
         self.shootingRange = 120
+
+
+
+    """
+        Define the turrent range on the x axes
+    """
+    def getShootingZoneX(self, pos):
+
+        x1 = self.getXPos() - self.shootingRange//2 -10
+
+        x2 = self.getXPos()+ self.length + self.shootingRange//2 + 10
+
+        if pos == 0:
+
+            return x1
+
+        return x2
+
+
+    """
+        Define the turrent range on the y axes
+    """
+    def getShootingZoneY(self, pos):
+
+        y1 = self.getNormalPosY() - self.shootingRange 
+
+        y2 = self.getNormalPosY()+ self.length +20
+
+        if pos == 0:
+            
+            return y1
+
+        return y2 
         
 
     """
-        Define the turrent range and draw it
+        draw the turrent range 
         *1000,700 = screen size
-
     """
     def shooterRange(self, normalisedPosX, normalisedPosY):
         
