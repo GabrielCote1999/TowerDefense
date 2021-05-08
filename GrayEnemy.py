@@ -15,6 +15,9 @@ class GrayEnemy(Characters):
 
 
 
+	"""
+		TODO: mettre les changements de mouvements dans une fonction unique
+	"""
 
 	def move(self, grayEnemy):
 
@@ -78,6 +81,11 @@ class GrayEnemy(Characters):
 		elif self.posX >=907 and self.posY >= 525 and self.posY < 700:
 
 			self.posY = self.posY +5
+			self.setInvisible()
+
+		elif self.posX >=907 and self.posY >= 525 and self.posY < 750:
+
+			self.setInvisible()
 
 		
 

@@ -6,7 +6,7 @@ class Tower():
 
 
 
-    def __init__(self,xPos, yPos):
+    def __init__(self, xPos, yPos):
 
         self.xPos = xPos
         self.yPos = yPos

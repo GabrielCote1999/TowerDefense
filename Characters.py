@@ -22,6 +22,11 @@ class Characters():
 
 		return self.posY - self.width/2
 
+
+	"""
+		TODO: mettre les changements de mouvements dans une fonction unique
+	"""
+
 	def move(self, plane):
 
 		current_path = os.path.dirname( "towerDefense" )
@@ -85,6 +90,12 @@ class Characters():
 
 			self.posY = self.posY +5
 
+			
+
+		elif self.posX >=907 and self.posY >= 525 and self.posY < 750:
+
+			self.setInvisible()
+
 
 		return plane
 
@@ -102,6 +113,23 @@ class Characters():
 	def getLife(self):
 
 		return self.life
+
+	def getAttacked(self):
+
+		self.life = self.life -1
+		return self.life
+
+	def isVisible(self):
+
+		if self.life > 0:
+
+			return True
+
+		return False
+
+	def setInvisible(self):
+
+		self.life = 0
 
 		
 	

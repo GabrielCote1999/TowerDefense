@@ -1,13 +1,12 @@
 import pygame, sys
 import os
-
 from Tower import Tower
 from Map import Map
 import time 
-
 from Characters import Characters
 from GrayEnemy import GrayEnemy
 import random
+from GrayTurret import GrayTurret
 
 
 y = Map(0,0)
@@ -24,10 +23,11 @@ class Game():
 
     def __init__(self):
         self.lives = 100
-        self.towers = []
+        self.towers = [GrayTurret(100,200), Tower(800,200), Tower(500,600)]
         self.characters = []
 
         self.characterNum = len(self.characters)
+        self.towerNum = len(self.towers)
         self.compteur = 0
         self.objectCount = 0
 
@@ -41,18 +41,22 @@ class Game():
         WIN.blit( Map.surfaceMap(self), (0, 0) )
 
         #draw planes
+
         for i in range (self.characterNum):
-            WIN.blit(game.characters[i].move(game.characters[i]), ( (game.characters[i].getXPos()), (game.characters[i].getYPos()))  ) 
+            if game.characters[i].isVisible():
+                WIN.blit(game.characters[i].move(game.characters[i]), ( (game.characters[i].getXPos()), (game.characters[i].getYPos()))  ) 
         
         
 
 
 
-        #draw the tower range
-        WIN.blit(x.shooterRange(x.getNormalPosX(), x.getNormalPosY()),  (int(x.getNormalPosX()-x.getNormalPosX()), (int(x.getNormalPosY()-x.getNormalPosY())) ) ) 
+       
+        #draw the towers and their range 
+        for tower in range (self.towerNum):
 
-        #draw the tower
-        WIN.blit(x.surfaceTower(), ( x.getXPos(), x.getYPos() ) )
+            WIN.blit(self.towers[tower].shooterRange(self.towers[tower].getNormalPosX(), self.towers[tower].getNormalPosY()),  (int(self.towers[tower].getNormalPosX()-self.towers[tower].getNormalPosX()), (int(self.towers[tower].getNormalPosY()-self.towers[tower].getNormalPosY())) ) ) 
+            WIN.blit(self.towers[tower].surfaceTower(), ( self.towers[tower].getXPos(), self.towers[tower].getYPos() ) )
+            
    
         pygame.display.update()
 
@@ -62,14 +66,23 @@ class Game():
         #character
         WIN.blit(character.move(),  (int(0), (int(0)) ) ) 
 
-    def towerAttack(self, tower):
+    """
+        TODO: faire certain que les enemies perdes leurs vies
+    """
+
+    def towerAttack(self):
+
+        for tower in range (self.towerNum-1):
         
+            for i in range (self.characterNum-1):
 
-        if self.characters[0].getXPos() > tower.getShootingZoneX(0) and self.characters[0].getXPos() < tower.getShootingZoneX(1) and self.characters[0].getYPos() > tower.getShootingZoneY(0)and self.characters[0].getYPos() < tower.getShootingZoneY(1):
+                    if self.characters[i].getXPos() > self.towers[tower].getShootingZoneX(0) and self.characters[0].getXPos() < self.towers[tower].getShootingZoneX(1) and self.characters[i].getYPos() > self.towers[tower].getShootingZoneY(0)and self.characters[0].getYPos() < self.towers[tower].getShootingZoneY(1):
 
-            
-            self.test = self.test + 1
-            print(self.test)
+                        self.characters[i].getAttacked()
+                
+
+                        print(self.characters[0].getLife())
+                      
 
 
     #add the different characters to the game every x seconds
@@ -89,15 +102,15 @@ class Game():
                 self.objectCount = self.objectCount + 1
 
 
-
+                
 
 
 def main():
     game = Game()
     clock = pygame.time.Clock()
     run = True
-    x = Tower(100,200)
-
+    x = GrayTurret(100,200)
+    y = GrayTurret(100,200)
     character = game.characters
 
 
@@ -105,7 +118,8 @@ def main():
 
         game.addCharacters()
 
-        game.towerAttack(x)
+        game.towerAttack()
+        
        
 
 
