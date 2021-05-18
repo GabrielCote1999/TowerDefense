@@ -7,6 +7,7 @@ from Characters import Characters
 from GrayEnemy import GrayEnemy
 import random
 from GrayTurret import GrayTurret
+from BrownEnemy import BrownEnemy
 
 
 y = Map(0,0)
@@ -15,6 +16,7 @@ WIDTH = 1000
 HEIGHT = 700
 WIN = pygame.display.set_mode( (WIDTH, HEIGHT) )
 FPS = 60
+RED = (255,0,0)
 
 pygame.display.set_caption( "Jeux" )
 
@@ -22,7 +24,7 @@ pygame.display.set_caption( "Jeux" )
 class Game():
 
     def __init__(self):
-        self.lives = 100
+        self.lives = 50
         self.towers = [GrayTurret(100,200), Tower(800,200), Tower(500,600)]
         self.characters = []
 
@@ -31,40 +33,63 @@ class Game():
         self.compteur = 0
         self.objectCount = 0
 
+        self.gameLife = 100
+
         self.test = 0
 
 
-    def draw_window(self, x, y,character,game):
+
+    def gameDmg(self):
+
+        for i in range (self.characterNum):
+           # print("pos de 0 ",self.characters[0].isVisible())
+
+            if self.characters[i].getYPos() >= 650 and self.characters[i].isVisible() == True and self.characters[i].getDmgCount() !=0:
+
+                self.gameLife = self.gameLife - self.characters[i].getDmg()
+
+                self.characters[i].decDmgCount()
+                print("dans if")
+
+
+    def getGameLife(self):
+
+        return self.gameLife
+
+
+    def draw_window(self,game):
 
        
         #draw the map
         WIN.blit( Map.surfaceMap(self), (0, 0) )
 
-        #draw planes
-
-        for i in range (self.characterNum):
-            if game.characters[i].isVisible():
-                WIN.blit(game.characters[i].move(game.characters[i]), ( (game.characters[i].getXPos()), (game.characters[i].getYPos()))  ) 
-        
-        
+        #draw characters
+        self.drawCharacters()
 
 
 
-       
+
+
         #draw the towers and their range 
         for tower in range (self.towerNum):
 
             WIN.blit(self.towers[tower].shooterRange(self.towers[tower].getNormalPosX(), self.towers[tower].getNormalPosY()),  (int(self.towers[tower].getNormalPosX()-self.towers[tower].getNormalPosX()), (int(self.towers[tower].getNormalPosY()-self.towers[tower].getNormalPosY())) ) ) 
             WIN.blit(self.towers[tower].surfaceTower(), ( self.towers[tower].getXPos(), self.towers[tower].getYPos() ) )
-            
-   
+
         pygame.display.update()
 
 
-    def drawCharacters(self,character):
+    #Draw the characters on the map
+    def drawCharacters(self):
 
         #character
-        WIN.blit(character.move(),  (int(0), (int(0)) ) ) 
+        for i in range (self.characterNum):
+            if self.characters[i].isVisible():
+
+                self.characters[i].drawHealthBar(WIN)
+
+                WIN.blit(self.characters[i].move(self.characters[i]), ( (self.characters[i].getXPos()), (self.characters[i].getYPos()))  ) 
+                
 
     """
         TODO: faire certain que les enemies perdes leurs vies
@@ -73,16 +98,17 @@ class Game():
     def towerAttack(self):
 
         for tower in range (self.towerNum-1):
-        
+
             for i in range (self.characterNum-1):
 
-                    if self.characters[i].getXPos() > self.towers[tower].getShootingZoneX(0) and self.characters[0].getXPos() < self.towers[tower].getShootingZoneX(1) and self.characters[i].getYPos() > self.towers[tower].getShootingZoneY(0)and self.characters[0].getYPos() < self.towers[tower].getShootingZoneY(1):
+                    if self.characters[i].getXPos() > self.towers[tower].getShootingZoneX(0) and self.characters[i].getXPos() < self.towers[tower].getShootingZoneX(1) and self.characters[i].getYPos() > self.towers[tower].getShootingZoneY(0)and self.characters[i].getYPos() < self.towers[tower].getShootingZoneY(1):
 
                         self.characters[i].getAttacked()
-                
 
-                        print(self.characters[0].getLife())
-                      
+
+
+                       
+
 
 
     #add the different characters to the game every x seconds
@@ -91,9 +117,9 @@ class Game():
         if self.compteur %30 == 0:
 
 
-                randomEnemy = [Characters(),GrayEnemy()]
+                randomEnemy = [Characters(),GrayEnemy(), BrownEnemy()]
 
-                randomNumber = random.randint(0,1)
+                randomNumber = random.randint(0,2)
 
                 self.characters.append(randomEnemy[randomNumber])
 
@@ -109,8 +135,8 @@ def main():
     game = Game()
     clock = pygame.time.Clock()
     run = True
-    x = GrayTurret(100,200)
-    y = GrayTurret(100,200)
+   
+    
     character = game.characters
 
 
@@ -119,6 +145,9 @@ def main():
         game.addCharacters()
 
         game.towerAttack()
+
+        game.gameDmg()
+        print("this is game life", game.getGameLife())
         
        
 
@@ -152,7 +181,7 @@ def main():
                 print(pygame.mouse.get_pos())
 
 
-        game.draw_window(x,y, character, game)
+        game.draw_window(game)
 
 
 

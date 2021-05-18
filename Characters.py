@@ -1,6 +1,10 @@
 import pygame
 import os
 
+
+
+
+
 class Characters():
 
 
@@ -8,10 +12,34 @@ class Characters():
 
 		self.posY = 520
 		self.posX = 0
-		self.life = 100
+		self.life = 50
 		self.ray = 30
 		self.width = 100
 		self.length = 100
+		self.folderName = "towerDefense"
+		self.assetName = "greenPlane.png"
+		self.dmg = 2
+		self.dmgCount = 1
+
+	def getDmgCount(self):
+
+		return self.dmgCount
+
+	def decDmgCount(self):
+
+		self.dmgCount = self.dmgCount -1 
+
+	def getDmg(self):
+
+		return self.dmg
+
+
+	def drawHealthBar(self, WIN):
+
+
+		pygame.draw.rect(WIN, (255,0,0), pygame.Rect(self.getXPos()  , self.getYPos(), 50, 10))
+
+		pygame.draw.rect(WIN, (0,255,0), pygame.Rect(self.getXPos()  , self.getYPos(), self.getLife() , 10))
 
 
 	def getXPos(self):
@@ -23,15 +51,21 @@ class Characters():
 		return self.posY - self.width/2
 
 
+	def calculateHealthBarLength(self):
+
+		return self.getLife() % 50
+
+
+
 	"""
 		TODO: mettre les changements de mouvements dans une fonction unique
 	"""
 
 	def move(self, plane):
 
-		current_path = os.path.dirname( "towerDefense" )
+		current_path = os.path.dirname( self.folderName )
 
-		transform = os.path.join( current_path, "greenPlane.png" )
+		transform = os.path.join( current_path, self.assetName )
 
 		plane = pygame.image.load( transform )
 
@@ -92,7 +126,7 @@ class Characters():
 
 			
 
-		elif self.posX >=907 and self.posY >= 525 and self.posY < 750:
+		elif self.posX >=907 and self.posY >= 525 and self.posY < 750 or self.getLife() <= 0:
 
 			self.setInvisible()
 
