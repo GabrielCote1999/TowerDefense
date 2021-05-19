@@ -18,5 +18,15 @@ class GrayEnemy(Characters):
 		self.dmgCount = 1
 
 
+	def drawHealthBar(self, WIN):
+
+
+		pygame.draw.rect(WIN, (255,0,0), pygame.Rect(self.getXPos() - 20  , self.getYPos(), 150, 10))
+
+		pygame.draw.rect(WIN, (0,255,0), pygame.Rect(self.getXPos() - 20  , self.getYPos(), self.getLife() , 10))
+
+
+
+
 
 	

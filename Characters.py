@@ -37,9 +37,9 @@ class Characters():
 	def drawHealthBar(self, WIN):
 
 
-		pygame.draw.rect(WIN, (255,0,0), pygame.Rect(self.getXPos()  , self.getYPos(), 50, 10))
+		pygame.draw.rect(WIN, (255,0,0), pygame.Rect(self.getXPos()+ 20  , self.getYPos(), 50, 10))
 
-		pygame.draw.rect(WIN, (0,255,0), pygame.Rect(self.getXPos()  , self.getYPos(), self.getLife() , 10))
+		pygame.draw.rect(WIN, (0,255,0), pygame.Rect(self.getXPos()+ 20  , self.getYPos(), self.getLife() , 10))
 
 
 	def getXPos(self):

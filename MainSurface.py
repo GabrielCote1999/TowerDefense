@@ -34,8 +34,32 @@ class Game():
         self.objectCount = 0
 
         self.gameLife = 100
+        self.click = True
 
         self.test = 0
+
+
+
+    def clicks(self):
+
+        if self.click == True:
+
+            self.click = False
+        else:
+
+            self.click = True
+
+    def selectTowers(self):
+
+        for i in range(self.towerNum):
+
+            if pygame.mouse.get_pos()[0] >= self.towers[i].getXPos() and pygame.mouse.get_pos()[0] <=  self.towers[i].getXPos()+self.towers[i].getWidth() and pygame.mouse.get_pos()[1] <= self.towers[i].getYPos()+self.towers[i].getLength() and pygame.mouse.get_pos()[1] >= self.towers[i].getYPos():
+
+                return True
+
+    def getClick(self):
+
+        return self.click
 
 
 
@@ -49,7 +73,7 @@ class Game():
                 self.gameLife = self.gameLife - self.characters[i].getDmg()
 
                 self.characters[i].decDmgCount()
-                print("dans if")
+                #print("dans if")
 
 
     def getGameLife(self):
@@ -106,11 +130,6 @@ class Game():
                         self.characters[i].getAttacked()
 
 
-
-                       
-
-
-
     #add the different characters to the game every x seconds
     def addCharacters(self):
 
@@ -128,15 +147,11 @@ class Game():
                 self.objectCount = self.objectCount + 1
 
 
-                
-
-
 def main():
     game = Game()
     clock = pygame.time.Clock()
     run = True
-   
-    
+
     character = game.characters
 
 
@@ -147,19 +162,17 @@ def main():
         game.towerAttack()
 
         game.gameDmg()
-        print("this is game life", game.getGameLife())
-        
-       
 
+        #print("click item ", game.getClick())
+
+
+        #print("this is game life", game.getGameLife())
 
         game.compteur = game.compteur+1
 
         #print(game.compteur)
         #print(game.characters[game.objectCount].checkDelete())
 
-        
-
-        isclicked = True
         # clock
         clock = pygame.time.Clock()
         run = True
@@ -173,12 +186,14 @@ def main():
                 run = False
 
             if event.type == pygame.MOUSEBUTTONDOWN:
+
+                print(game.selectTowers())
                 #Change the position of a tower at the clicked position
                 #x.changePos(x)
 
                 #print("ceci est x ",x.getXPos())
                 #print("Ceci est Y ",x.getYPos())
-                print(pygame.mouse.get_pos())
+                #print(pygame.mouse.get_pos()[0])
 
 
         game.draw_window(game)
