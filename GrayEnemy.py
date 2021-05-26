@@ -16,6 +16,7 @@ class GrayEnemy(Characters):
 		self.assetName = "grayEnemy.png"
 		self.dmg= 2
 		self.dmgCount = 1
+		self.angle = 0
 
 
 	def drawHealthBar(self, WIN):

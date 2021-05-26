@@ -9,7 +9,7 @@ import random
 from GrayTurret import GrayTurret
 from BrownEnemy import BrownEnemy
 
-
+pygame.init()
 y = Map(0,0)
 
 WIDTH = 1000
@@ -19,13 +19,13 @@ FPS = 60
 RED = (255,0,0)
 
 pygame.display.set_caption( "Jeux" )
-
+font = pygame.font.Font(None, 50)
 
 class Game():
 
     def __init__(self):
         self.lives = 50
-        self.towers = [GrayTurret(100,200), Tower(800,200), Tower(500,600)]
+        self.towers = [GrayTurret(100,200), Tower(800,150), Tower(800,600)]
         self.characters = []
 
         self.characterNum = len(self.characters)
@@ -48,6 +48,13 @@ class Game():
         else:
 
             self.click = True
+
+    def drawScore(self):
+
+        text = font.render("Life: " +str(self.getGameLife()), 0, (50,255,110))
+        WIN.blit(text, (10,10))
+
+       
 
     def selectTowers(self):
 
@@ -89,6 +96,8 @@ class Game():
 
         #draw characters
         self.drawCharacters()
+
+        self.drawScore()
 
 
 
@@ -193,7 +202,7 @@ def main():
 
                 #print("ceci est x ",x.getXPos())
                 #print("Ceci est Y ",x.getYPos())
-                #print(pygame.mouse.get_pos()[0])
+                print(pygame.mouse.get_pos())
 
 
         game.draw_window(game)

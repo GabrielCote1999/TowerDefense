@@ -20,6 +20,8 @@ class Characters():
 		self.assetName = "greenPlane.png"
 		self.dmg = 2
 		self.dmgCount = 1
+		self.angle = 0
+
 
 	def getDmgCount(self):
 
@@ -55,6 +57,16 @@ class Characters():
 
 		return self.getLife() % 50
 
+	def getAngle(self):
+
+		return self.angle
+
+	def setAngle(self, x):
+
+		self.angle = self.angle + x
+
+		return self.angle
+
 
 
 	"""
@@ -71,62 +83,87 @@ class Characters():
 
 		plane = pygame.transform.scale( plane, (100, 100) )
 
+		#plane = pygame.transform.rotate(plane, 100)
+
 		
 
 		if self.posX < 133:
 
 			self.posX = self.posX +5
 
-		elif self.posX > 133 and self.posX < 223  :
+			
+
+		elif self.posX > 133 and self.posX < 220  :
 
 			self.posY = self.posY -5
 			self.posX = self.posX +2
 
-		elif self.posX >= 223 and self.posX < 324:
+			plane = pygame.transform.rotate(plane, 70)
+
+			
+
+
+
+		elif self.posX >= 170 and self.posX < 324:
 
 			self.posX = self.posX +5
+			plane = pygame.transform.rotate(plane, -5)
+
 
 		elif self.posX >= 324 and self.posX < 370:
 
 			self.posX = self.posX +1
 			self.posY = self.posY - 5
+			plane = pygame.transform.rotate(plane, 75)
 
 		elif self.posX >= 370 and self.posX< 869 and self.posY<100:
 
 			self.posX = self.posX +5
+			plane = pygame.transform.rotate(plane, -5)
+			
 
-		elif self.posX >=869 and self.posX < 920 and self.posY<=215 :
+		elif self.posX >=869 and self.posX <= 950 and self.posY<=210 :
 
 			self.posX = self.posX +2
 			self.posY = self.posY +5
+			plane = pygame.transform.rotate(plane, -75)
 			
 			
 
-		elif self.posX <=920  and self.posY >= 215 and self.posY< 395:
+		elif self.posX >=740  and self.posY >= 150 and self.posY< 360:
 
-			self.posX = self.posX -5
+			self.posX = self.posX -6
 			self.posY = self.posY +5
 			
+			plane = pygame.transform.rotate(plane, -135)
 
-		elif self.posX >= 740 and self.posY >=395 and self.posY < 525:
 
-			self.posX = self.posX +2
-			self.posY = self.posY +5
+	
+
+		elif self.posX >= 740 and self.posY >=360 and self.posY < 525:
+
+			self.posX = self.posX +1
+			self.posY = self.posY +6
+
+			plane = pygame.transform.rotate(plane, -75)
 			
 
 			
 
-		elif self.posX >= 792 and self.posY >= 525 and self.posX <= 905:
+		elif self.posX >= 775 and self.posY >= 525 and self.posX <= 905:
 
 			self.posX = self.posX +5			
 
-		elif self.posX >=907 and self.posY >= 525 and self.posY < 700:
+		elif self.posX >=900 and self.posY >= 525 and self.posY < 700:
 
 			self.posY = self.posY +5
+			plane = pygame.transform.rotate(plane, -90)
 
 			
 
-		elif self.posX >=907 and self.posY >= 525 and self.posY < 750 or self.getLife() <= 0:
+		elif self.posX >=905 and self.posY >= 525 and self.posY < 750 or self.getLife() <= 0:
+
+			plane = pygame.transform.rotate(plane, -90)
 
 			self.setInvisible()
 
