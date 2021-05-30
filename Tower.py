@@ -15,7 +15,28 @@ class Tower():
         self.width = 100
         self. length = 100
         self.shootingRange = 120
+        self.enemyInRange = []
 
+
+
+
+    #return the list of the enemies in range
+    def getEnemyInRange(self):
+
+        return self.enemyInRange
+
+    #add the enemies in range in a list
+    def addEnemyInRange(self, character):
+
+        self.enemyInRange.append(character)
+
+        
+
+
+    #delete the enemy not in range anymore of the list
+    def removeEnemy(self, character):
+
+        self.enemyInRange.pop(character)
 
 
     """
@@ -84,8 +105,6 @@ class Tower():
         normalisedPosY = (self.yPos)+self.length//2
 
         return normalisedPosY
-
-
 
 
     """"

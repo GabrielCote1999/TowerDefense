@@ -28,6 +28,7 @@ class Game():
         self.towers = [GrayTurret(100,200), Tower(800,150), Tower(800,600)]
         self.characters = []
 
+
         self.characterNum = len(self.characters)
         self.towerNum = len(self.towers)
         self.compteur = 0
@@ -100,9 +101,6 @@ class Game():
         self.drawScore()
 
 
-
-
-
         #draw the towers and their range 
         for tower in range (self.towerNum):
 
@@ -113,6 +111,7 @@ class Game():
 
 
     #Draw the characters on the map
+    
     def drawCharacters(self):
 
         #character
@@ -124,19 +123,43 @@ class Game():
                 WIN.blit(self.characters[i].move(self.characters[i]), ( (self.characters[i].getXPos()), (self.characters[i].getYPos()))  ) 
                 
 
-    """
-        TODO: faire certain que les enemies perdes leurs vies
-    """
+    #attack the first enemy that entered the shooting zone of the turret
 
     def towerAttack(self):
+
+        self.towerList()
+
+        for tower in range (self.towerNum-1):
+
+            if self.towers[tower].getEnemyInRange() != []:
+
+                self.towers[tower].getEnemyInRange()[len(self.towers[tower].getEnemyInRange())-1].getAttacked()
+
+    """
+        Add the enemy to a list if they are in range, delete them if they are not
+    """
+
+    def towerList(self):
 
         for tower in range (self.towerNum-1):
 
             for i in range (self.characterNum-1):
 
+                    #look if the enemies are in the turrent range, if they are, add them in the list
                     if self.characters[i].getXPos() > self.towers[tower].getShootingZoneX(0) and self.characters[i].getXPos() < self.towers[tower].getShootingZoneX(1) and self.characters[i].getYPos() > self.towers[tower].getShootingZoneY(0)and self.characters[i].getYPos() < self.towers[tower].getShootingZoneY(1):
 
-                        self.characters[i].getAttacked()
+                        if self.characters[i] not in self.towers[tower].getEnemyInRange():
+
+                            self.towers[tower].addEnemyInRange(self.characters[i])
+
+
+
+                    #look if the enemies are not in the turrent range, in they are not, remove them from the list
+                    elif self.characters[i] in self.towers[tower].getEnemyInRange() and (self.characters[i].getXPos() < self.towers[tower].getShootingZoneX(0) or self.characters[i].getXPos() > self.towers[tower].getShootingZoneX(1)) and (self.characters[i].getYPos() < self.towers[tower].getShootingZoneY(0)or self.characters[i].getYPos() > self.towers[tower].getShootingZoneY(1) ):
+
+                        print("dans if")
+                        self.towers[tower].removeEnemy(self.towers[tower].getEnemyInRange().index(self.characters[i]))
+                        
 
 
     #add the different characters to the game every x seconds
