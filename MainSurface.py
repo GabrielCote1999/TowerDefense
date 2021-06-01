@@ -25,7 +25,7 @@ class Game():
 
     def __init__(self):
         self.lives = 50
-        self.towers = [GrayTurret(100,200), Tower(800,150), Tower(800,600)]
+        self.towers = [Tower(100,200), Tower(800,150), Tower(800,600)]
         self.characters = []
 
 
@@ -35,7 +35,7 @@ class Game():
         self.objectCount = 0
 
         self.gameLife = 100
-        self.click = True
+        self.click = False
 
         self.test = 0
 
@@ -61,9 +61,17 @@ class Game():
 
         for i in range(self.towerNum):
 
-            if pygame.mouse.get_pos()[0] >= self.towers[i].getXPos() and pygame.mouse.get_pos()[0] <=  self.towers[i].getXPos()+self.towers[i].getWidth() and pygame.mouse.get_pos()[1] <= self.towers[i].getYPos()+self.towers[i].getLength() and pygame.mouse.get_pos()[1] >= self.towers[i].getYPos():
+            if pygame.mouse.get_pos()[0] >= self.towers[i].getXPos() and pygame.mouse.get_pos()[0] <=  self.towers[i].getXPos()+self.towers[i].getWidth() and pygame.mouse.get_pos()[1] <= self.towers[i].getYPos()+self.towers[i].getLength() and pygame.mouse.get_pos()[1] >= self.towers[i].getYPos() and self.getClick() == False:
 
-                return True
+                self.towers[i].isClick()
+
+                print("ceci est click: ", self.towers[i].getClick())
+
+            else:
+
+                self.towers[i].unClick()
+
+            
 
     def getClick(self):
 
@@ -88,7 +96,7 @@ class Game():
 
         return self.gameLife
 
-
+ 
     def draw_window(self,game):
 
        
@@ -104,8 +112,11 @@ class Game():
         #draw the towers and their range 
         for tower in range (self.towerNum):
 
-            WIN.blit(self.towers[tower].shooterRange(self.towers[tower].getNormalPosX(), self.towers[tower].getNormalPosY()),  (int(self.towers[tower].getNormalPosX()-self.towers[tower].getNormalPosX()), (int(self.towers[tower].getNormalPosY()-self.towers[tower].getNormalPosY())) ) ) 
-            WIN.blit(self.towers[tower].surfaceTower(), ( self.towers[tower].getXPos(), self.towers[tower].getYPos() ) )
+            if self.towers[tower].getClick() == True:
+
+                WIN.blit(self.towers[tower].shooterRange(self.towers[tower].getNormalPosX(), self.towers[tower].getNormalPosY()),  (int(self.towers[tower].getNormalPosX()-self.towers[tower].getNormalPosX()), (int(self.towers[tower].getNormalPosY()-self.towers[tower].getNormalPosY())) ) ) 
+            
+            WIN.blit(self.towers[tower].surfaceTower(), ( self.towers[tower].getXPos(), self.towers[tower].getYPos()  ) )
 
         pygame.display.update()
 
@@ -195,7 +206,7 @@ def main():
 
         game.gameDmg()
 
-        #print("click item ", game.getClick())
+       
 
 
         #print("this is game life", game.getGameLife())

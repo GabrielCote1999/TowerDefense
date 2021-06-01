@@ -16,6 +16,59 @@ class Tower():
         self. length = 100
         self.shootingRange = 120
         self.enemyInRange = []
+        self.angle = 0
+        self.click = False
+
+    #define if a tower is clicked or not
+
+    def moveTower(self):
+
+        if self.getClick() == True :
+
+            print("dans le move")
+
+            self.setPos(pygame.mouse.get_pos()) 
+
+
+
+    def getClick(self):
+
+        return self.click
+
+
+    def isClick(self):
+
+        self.click = True
+
+    def unClick(self):
+
+        self.click = False
+
+
+    #temporaire
+    def plusAngle(self):
+
+        self.angle = self.angle + 2
+
+    #temporaire
+    def getAngle(self):
+
+        return self.angle
+
+    def rotateTowardEnemies(self):
+
+        #if self.getEnemyInRange() != [] :
+
+          #  angle = self.getYPos() - self.getEnemyInRange()[len(self.getEnemyInRange())-1].getYPos()
+
+        #else:
+         #   return 0 
+
+
+
+        return angle
+
+
 
 
 
@@ -29,8 +82,6 @@ class Tower():
     def addEnemyInRange(self, character):
 
         self.enemyInRange.append(character)
-
-        
 
 
     #delete the enemy not in range anymore of the list
@@ -117,9 +168,26 @@ class Tower():
 
         transform = os.path.join(current_path, "towerDefense_tile249.png")
 
+        
+
         Tower = pygame.image.load(transform)
 
         Tower = pygame.transform.scale(Tower, (100, 100) )
+
+        Tower = pygame.transform.rotate(Tower,self.getAngle())
+
+        Tower = pygame.transform.scale(Tower, (100, 100) )
+
+        #Tower_copy = pygame.transform.scale(Tower, (100, 100) )
+
+        self.plusAngle()
+        self.moveTower()
+
+       # Tower = pygame.transform.rotate(Tower,self.getAngle())
+
+
+        
+        
 
         return Tower
 
@@ -143,9 +211,10 @@ class Tower():
 
         self.yPos = yPos
 
-    def setPos(self,x,y):
+    def setPos(self,pos):
 
-        self.pos[self.xPos,self.yPos] = [x,y]
+       self.setXPos(pos[0]-self.getWidth()/2)
+       self.setYPos(pos[1]-self.getLength()/2)
 
     def getLength(self):
 
