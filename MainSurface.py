@@ -8,6 +8,7 @@ from GrayEnemy import GrayEnemy
 import random
 from GrayTurret import GrayTurret
 from BrownEnemy import BrownEnemy
+from BuyGreenTower import BuyGreenTower
 
 pygame.init()
 y = Map(0,0)
@@ -27,10 +28,11 @@ class Game():
         self.lives = 50
         self.towers = [Tower(100,200), Tower(800,150), Tower(800,600)]
         self.characters = []
-
+        self.buyTower =[BuyGreenTower(600,300)]
 
         self.characterNum = len(self.characters)
         self.towerNum = len(self.towers)
+        self.buyTowerNum = len(self.buyTower)
         self.compteur = 0
         self.objectCount = 0
 
@@ -109,6 +111,14 @@ class Game():
 
         return self.gameLife
 
+    def drawBuyTower(self):
+
+        for i in range(self.buyTowerNum):
+
+            WIN.blit(self.buyTower[i].drawBuyTower(), (self.buyTower[i].getPosX(),self.buyTower[i].getPosY()))
+
+
+
  
     def draw_window(self,game):
 
@@ -120,6 +130,8 @@ class Game():
         self.drawCharacters()
 
         self.drawScore()
+
+        self.drawBuyTower()
 
 
         #draw the towers and their range 
