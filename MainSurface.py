@@ -57,21 +57,34 @@ class Game():
 
        
 
-    def selectTowers(self):
+    def showTowerRange(self):
 
         for i in range(self.towerNum):
 
+            #look if the user have clicked on a tower NOT DONE
             if pygame.mouse.get_pos()[0] >= self.towers[i].getXPos() and pygame.mouse.get_pos()[0] <=  self.towers[i].getXPos()+self.towers[i].getWidth() and pygame.mouse.get_pos()[1] <= self.towers[i].getYPos()+self.towers[i].getLength() and pygame.mouse.get_pos()[1] >= self.towers[i].getYPos() and self.getClick() == False:
 
                 self.towers[i].isClick()
-
-                print("ceci est click: ", self.towers[i].getClick())
+                print("yoo")
 
             else:
 
                 self.towers[i].unClick()
 
-            
+    def moveTower(self, key_pressed):
+
+        for i in range(self.towerNum):
+
+        #look if the m key is pressed 
+
+            if pygame.mouse.get_pos()[0] >= self.towers[i].getXPos() and pygame.mouse.get_pos()[0] <=  self.towers[i].getXPos()+self.towers[i].getWidth() and pygame.mouse.get_pos()[1] <= self.towers[i].getYPos()+self.towers[i].getLength() and pygame.mouse.get_pos()[1] >= self.towers[i].getYPos() and self.towers[i].getClickMove() == False and key_pressed[pygame.K_m]:
+
+                self.towers[i].setStartPos(pygame.mouse.get_pos())
+                self.towers[i].isClickMove()
+
+            elif pygame.mouse.get_pos() != self.towers[i].getStartPos() :
+
+                self.towers[i].unClickMove()
 
     def getClick(self):
 
@@ -230,13 +243,23 @@ def main():
 
             if event.type == pygame.MOUSEBUTTONDOWN:
 
-                print(game.selectTowers())
+                game.showTowerRange()
                 #Change the position of a tower at the clicked position
                 #x.changePos(x)
 
                 #print("ceci est x ",x.getXPos())
                 #print("Ceci est Y ",x.getYPos())
                 print(pygame.mouse.get_pos())
+
+
+            if event.type == pygame.KEYDOWN :
+
+                key_pressed = pygame.key.get_pressed()
+
+               
+
+                game.moveTower(key_pressed)
+                
 
 
         game.draw_window(game)

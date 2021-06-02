@@ -18,18 +18,47 @@ class Tower():
         self.enemyInRange = []
         self.angle = 0
         self.click = False
+        self.clickMove = False
+        self.startPos = []
+
+
+
+    #set the startPos to a position
+    def setStartPos(self, pos):
+
+        self.startPos = pos
+    
+
+
+
+    #get the position of the turrent when it was clicked
+    def getStartPos(self):
+
+        return self.startPos
+
+
+    #define clickMove to True
+    def isClickMove(self):
+
+        self.clickMove = True
+
+    #define clickMove to fasle
+    def unClickMove(self):
+
+        self.clickMove = False
+
 
     #define if a tower is clicked or not
-
     def moveTower(self):
 
-        if self.getClick() == True :
-
-            print("dans le move")
+        if self.getClickMove() == True :
 
             self.setPos(pygame.mouse.get_pos()) 
 
 
+    def getClickMove(self):
+
+        return self.clickMove
 
     def getClick(self):
 
@@ -37,6 +66,7 @@ class Tower():
 
 
     def isClick(self):
+
 
         self.click = True
 
