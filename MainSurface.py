@@ -45,6 +45,8 @@ class Game():
 
         self.test = 0
 
+        self.musicCount = 0
+
 
 
     def clicks(self):
@@ -63,6 +65,11 @@ class Game():
         
     def drawMenu(self):
 
+        soundObj = pygame.mixer.Sound('lofi.wav')
+
+        if self.musicCount != 1:
+            soundObj.play()
+
         self.menus[0].drawMenu(WIN, WIDTH, HEIGHT)
 
         myFont = pygame.font.SysFont('Geometric Sans-serif', 90)
@@ -73,11 +80,17 @@ class Game():
 
         quit = myFont.render("Quit", 100, (250,255,110))
 
-        WIN.blit(towerDefense, (255,50))
+        play = myFont.render("Play", 100, (255, 255, 110))
 
-        WIN.blit(settings, (255,200))
+        WIN.blit(play, (255, 200))
 
-        WIN.blit(quit,(255,300))
+        WIN.blit(towerDefense, (245,50))
+
+        WIN.blit(settings, (255,300))
+
+        WIN.blit(quit,(255,400))
+
+        self.musicCount = 1
         
 
        
