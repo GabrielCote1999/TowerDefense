@@ -79,7 +79,7 @@ class Characters():
 
 		transform = os.path.join( current_path, self.assetName )
 
-		plane = pygame.image.load( transform )
+		plane = pygame.image.load( transform ).convert_alpha()
 
 		plane = pygame.transform.scale( plane, (100, 100) )
 
@@ -89,7 +89,7 @@ class Characters():
 
 		if self.posX < 133:
 
-			self.posX = self.posX +5
+			self.posX = self.posX + 5
 
 			
 
@@ -168,6 +168,7 @@ class Characters():
 			self.setInvisible()
 
 
+
 		return plane
 
 	def checkDelete(self):
@@ -201,6 +202,7 @@ class Characters():
 	def setInvisible(self):
 
 		self.life = 0
+		del self
 
 		
 	

@@ -24,7 +24,7 @@ class GrayTurret(Tower):
 
 		transform = os.path.join(current_path, "greyTurret.png")
 
-		grayTower = pygame.image.load(transform)
+		grayTower = pygame.image.load(transform).convert_alpha()
 
 		grayTower = pygame.transform.scale(grayTower, (100, 100))
 

@@ -200,9 +200,9 @@ class Tower():
 
         
 
-        Tower = pygame.image.load(transform)
+        Tower = pygame.image.load(transform).convert_alpha()
 
-        Tower = pygame.transform.scale(Tower, (100, 100) )
+        
 
         Tower = pygame.transform.rotate(Tower,self.getAngle())
 
@@ -210,7 +210,7 @@ class Tower():
 
         #Tower_copy = pygame.transform.scale(Tower, (100, 100) )
 
-        self.plusAngle()
+        #self.plusAngle()
         self.moveTower()
 
        # Tower = pygame.transform.rotate(Tower,self.getAngle())

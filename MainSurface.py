@@ -9,6 +9,9 @@ import random
 from GrayTurret import GrayTurret
 from BrownEnemy import BrownEnemy
 from BuyGreenTower import BuyGreenTower
+from BuyRocketTower import BuyRocketTower
+from BuySubMachineGun import BuySubMachineGun
+from MainMenu import MainMenu
 
 pygame.init()
 y = Map(0,0)
@@ -28,7 +31,8 @@ class Game():
         self.lives = 50
         self.towers = [Tower(100,200), Tower(800,150), Tower(800,600)]
         self.characters = []
-        self.buyTower =[BuyGreenTower(600,300)]
+        self.buyTower =[BuyGreenTower(0,580), BuyRocketTower(200, 580), BuySubMachineGun(400,580)]
+        self.menus = [MainMenu()]
 
         self.characterNum = len(self.characters)
         self.towerNum = len(self.towers)
@@ -56,8 +60,34 @@ class Game():
 
         text = font.render("Life: " +str(self.getGameLife()), 0, (50,255,110))
         WIN.blit(text, (10,10))
+        
+    def drawMenu(self):
+
+        self.menus[0].drawMenu(WIN, WIDTH, HEIGHT)
+
+        myFont = pygame.font.SysFont('Geometric Sans-serif', 90)
+
+        towerDefense = myFont.render("Tower Defense", 100, (250,255,110))
+
+        settings = myFont.render("Settings", 100, (250,255,110))
+
+        quit = myFont.render("Quit", 100, (250,255,110))
+
+        WIN.blit(towerDefense, (255,50))
+
+        WIN.blit(settings, (255,200))
+
+        WIN.blit(quit,(255,300))
+        
 
        
+    def draw_Menus(self, game):
+
+        self.drawMenu()
+
+        pygame.display.update()
+
+
 
     def showTowerRange(self):
 
@@ -116,23 +146,42 @@ class Game():
         for i in range(self.buyTowerNum):
 
             WIN.blit(self.buyTower[i].drawBuyTower(), (self.buyTower[i].getPosX(),self.buyTower[i].getPosY()))
+        
 
+    #draw the map
+    def draw_map(self):
 
+        WIN.blit( Map.surfaceMap(self), (0, 0) )
+        
 
  
     def draw_window(self,game):
 
+
+
        
         #draw the map
-        WIN.blit( Map.surfaceMap(self), (0, 0) )
+       # self.draw_map()
 
+        
         #draw characters
-        self.drawCharacters()
+        #self.drawCharacters()
 
-        self.drawScore()
+        #self.drawScore()
 
-        self.drawBuyTower()
+        #self.drawBuyTower()
 
+       
+
+       # self.drawTower()
+
+
+
+        self.drawMenu()
+        pygame.display.update()
+        
+
+    def drawTower(self):
 
         #draw the towers and their range 
         for tower in range (self.towerNum):
@@ -140,10 +189,11 @@ class Game():
             if self.towers[tower].getClick() == True:
 
                 WIN.blit(self.towers[tower].shooterRange(self.towers[tower].getNormalPosX(), self.towers[tower].getNormalPosY()),  (int(self.towers[tower].getNormalPosX()-self.towers[tower].getNormalPosX()), (int(self.towers[tower].getNormalPosY()-self.towers[tower].getNormalPosY())) ) ) 
-            
+                
             WIN.blit(self.towers[tower].surfaceTower(), ( self.towers[tower].getXPos(), self.towers[tower].getYPos()  ) )
 
-        pygame.display.update()
+        
+
 
 
     #Draw the characters on the map
@@ -157,6 +207,8 @@ class Game():
                 self.characters[i].drawHealthBar(WIN)
 
                 WIN.blit(self.characters[i].move(self.characters[i]), ( (self.characters[i].getXPos()), (self.characters[i].getYPos()))  ) 
+
+                
                 
 
     #attack the first enemy that entered the shooting zone of the turret
@@ -231,6 +283,8 @@ def main():
 
         game.gameDmg()
 
+        
+
        
 
 
@@ -273,8 +327,11 @@ def main():
                 game.moveTower(key_pressed)
                 
 
+        print('fps', clock.tick(FPS))
 
-        game.draw_window(game)
+        game.draw_Menus(game)
+        #game.draw_window(game)
+
 
 
 
